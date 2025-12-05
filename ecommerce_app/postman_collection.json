@@ -1,0 +1,468 @@
+{
+	"info": {
+		"name": "Django eCommerce API",
+		"description": "Complete API collection for Django eCommerce RESTful API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "{{username}}",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "{{password}}",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000/api",
+			"type": "string"
+		},
+		{
+			"key": "username",
+			"value": "vendor1",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "testpass123",
+			"type": "string"
+		},
+		{
+			"key": "store_id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "product_id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "vendor_id",
+			"value": "1",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Public Endpoints",
+			"item": [
+				{
+					"name": "List All Stores",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/stores/",
+							"host": ["{{base_url}}"],
+							"path": ["stores", ""]
+						},
+						"description": "Get a list of all stores (Public endpoint)"
+					}
+				},
+				{
+					"name": "Get Store Details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/stores/{{store_id}}/",
+							"host": ["{{base_url}}"],
+							"path": ["stores", "{{store_id}}", ""]
+						},
+						"description": "Get details of a specific store (Public endpoint)"
+					}
+				},
+				{
+					"name": "Get Vendor Stores",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/vendors/{{vendor_id}}/stores/",
+							"host": ["{{base_url}}"],
+							"path": ["vendors", "{{vendor_id}}", "stores", ""]
+						},
+						"description": "Get all stores for a specific vendor (Public endpoint)"
+					}
+				},
+				{
+					"name": "List Store Products",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/stores/{{store_id}}/products/",
+							"host": ["{{base_url}}"],
+							"path": ["stores", "{{store_id}}", "products", ""]
+						},
+						"description": "Get all products in a store (Public endpoint)"
+					}
+				},
+				{
+					"name": "Get Product Details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/products/{{product_id}}/",
+							"host": ["{{base_url}}"],
+							"path": ["products", "{{product_id}}", ""]
+						},
+						"description": "Get details of a specific product (Public endpoint)"
+					}
+				}
+			]
+		},
+		{
+			"name": "Vendor Endpoints (Authenticated)",
+			"item": [
+				{
+					"name": "Create Store",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"My Awesome Store\",\n    \"description\": \"This is a great store with amazing products!\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/stores/",
+							"host": ["{{base_url}}"],
+							"path": ["stores", ""]
+						},
+						"description": "Create a new store (Requires authentication)"
+					}
+				},
+				{
+					"name": "Update Store",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Updated Store Name\",\n    \"description\": \"Updated description\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/stores/{{store_id}}/",
+							"host": ["{{base_url}}"],
+							"path": ["stores", "{{store_id}}", ""]
+						},
+						"description": "Update a store (Requires authentication and ownership)"
+					}
+				},
+				{
+					"name": "Delete Store",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/stores/{{store_id}}/",
+							"host": ["{{base_url}}"],
+							"path": ["stores", "{{store_id}}", ""]
+						},
+						"description": "Delete a store (Requires authentication and ownership)"
+					}
+				},
+				{
+					"name": "Add Product to Store",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Amazing Product\",\n    \"description\": \"This is an amazing product with great features!\",\n    \"price\": \"99.99\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/stores/{{store_id}}/products/",
+							"host": ["{{base_url}}"],
+							"path": ["stores", "{{store_id}}", "products", ""]
+						},
+						"description": "Add a product to a store (Requires authentication and store ownership)"
+					}
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Updated Product Name\",\n    \"description\": \"Updated product description\",\n    \"price\": \"79.99\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/products/{{product_id}}/",
+							"host": ["{{base_url}}"],
+							"path": ["products", "{{product_id}}", ""]
+						},
+						"description": "Update a product (Requires authentication and store ownership)"
+					}
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products/{{product_id}}/",
+							"host": ["{{base_url}}"],
+							"path": ["products", "{{product_id}}", ""]
+						},
+						"description": "Delete a product (Requires authentication and store ownership)"
+					}
+				},
+				{
+					"name": "Get Store Reviews",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/stores/{{store_id}}/reviews/",
+							"host": ["{{base_url}}"],
+							"path": ["stores", "{{store_id}}", "reviews", ""]
+						},
+						"description": "Get all reviews for vendor's stores (Requires authentication and store ownership)"
+					}
+				}
+			]
+		},
+		{
+			"name": "XML Format Examples",
+			"item": [
+				{
+					"name": "List Stores (XML)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/stores/",
+							"host": ["{{base_url}}"],
+							"path": ["stores", ""]
+						},
+						"description": "Get stores list in XML format"
+					}
+				},
+				{
+					"name": "Get Store Details (XML)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/stores/{{store_id}}/",
+							"host": ["{{base_url}}"],
+							"path": ["stores", "{{store_id}}", ""]
+						},
+						"description": "Get store details in XML format"
+					}
+				}
+			]
+		}
+	]
+}
+
+
